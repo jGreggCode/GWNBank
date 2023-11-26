@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
 /**
@@ -29,6 +25,13 @@ public class RegisterFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         modifiedTextField1 = new ModifiedComponents.ModifiedTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        modifiedTextField2 = new ModifiedComponents.ModifiedTextField();
+        jLabel3 = new javax.swing.JLabel();
+        modifiedTextField3 = new ModifiedComponents.ModifiedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        modifiedTextField4 = new ModifiedComponents.ModifiedTextField();
+        jLabel5 = new javax.swing.JLabel();
         lblHeaderCover = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,17 +47,49 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         modifiedTextField1.setText("modifiedTextField1");
         jPanel1.add(modifiedTextField1);
-        modifiedTextField1.setBounds(20, 79, 290, 30);
+        modifiedTextField1.setBounds(60, 100, 260, 30);
 
         jLabel1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel1.setText("Register account");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 10, 160, 50);
+        jLabel1.setBounds(60, 20, 160, 50);
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel2.setText("First Name");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(60, 80, 120, 16);
+
+        modifiedTextField2.setText("modifiedTextField1");
+        jPanel1.add(modifiedTextField2);
+        modifiedTextField2.setBounds(60, 240, 260, 30);
+
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel3.setText("Last Name");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(60, 220, 120, 16);
+
+        modifiedTextField3.setText("modifiedTextField1");
+        jPanel1.add(modifiedTextField3);
+        modifiedTextField3.setBounds(60, 170, 260, 30);
+
+        jLabel4.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel4.setText("Middle Name");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(60, 150, 120, 16);
+
+        modifiedTextField4.setText("modifiedTextField1");
+        jPanel1.add(modifiedTextField4);
+        modifiedTextField4.setBounds(60, 310, 260, 30);
+
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel5.setText("Birthdate");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(60, 290, 120, 16);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 233, 1150, 440);
+        jPanel1.setBounds(0, 223, 1150, 450);
 
-        lblHeaderCover.setText("jLabel1");
+        lblHeaderCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registerHeader.png"))); // NOI18N
         getContentPane().add(lblHeaderCover);
         lblHeaderCover.setBounds(0, 0, 1150, 230);
 
@@ -99,8 +134,15 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblHeaderCover;
     private ModifiedComponents.ModifiedTextField modifiedTextField1;
+    private ModifiedComponents.ModifiedTextField modifiedTextField2;
+    private ModifiedComponents.ModifiedTextField modifiedTextField3;
+    private ModifiedComponents.ModifiedTextField modifiedTextField4;
     // End of variables declaration//GEN-END:variables
 }

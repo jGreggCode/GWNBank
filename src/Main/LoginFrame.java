@@ -1,5 +1,7 @@
 package Main;
 
+import Connection.User;
+import Connection.UserDAO;
 import Utilities.TextLimit;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.Icon;
@@ -168,6 +170,11 @@ public class LoginFrame extends javax.swing.JFrame {
         lblRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegister.setText("<html><u>Create an account?</u></html>");
         lblRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                register(evt);
+            }
+        });
         pnlLogin.add(lblRegister);
         lblRegister.setBounds(0, 420, 340, 16);
 
@@ -227,7 +234,18 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login
         // TODO add your handling code here:
+        UserDAO userDAO = new UserDAO();
         
+        String accountNo = txtAccountNo.getText();
+        String accountPass = new String(pwdPassword.getPassword());
+        
+        User user = userDAO.getUserByUsernameAndPassword(accountNo, accountPass);
+
+        if (user != null) {
+            System.out.println("User found: " + user.getUsername());
+        } else {
+            System.out.println("User not found");
+        }
     }//GEN-LAST:event_login
 
     private void showHidePassword(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showHidePassword
@@ -242,6 +260,12 @@ public class LoginFrame extends javax.swing.JFrame {
             lblPassword.setIcon(hideEye);
         }
     }//GEN-LAST:event_showHidePassword
+
+    private void register(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_register
+        // TODO add your handling code here:
+        this.dispose();
+        new RegisterFrame().setVisible(true);
+    }//GEN-LAST:event_register
 
     /**
      * @param args the command line arguments
