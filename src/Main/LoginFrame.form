@@ -96,9 +96,6 @@
           </Constraints>
         </Component>
         <Component class="ModifiedComponents.ModifiedTextField" name="txtAccountNo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="modifiedTextField1"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="35" y="230" width="270" height="-1"/>
@@ -125,9 +122,6 @@
           </Constraints>
         </Component>
         <Component class="ModifiedComponents.ModifiedPasswordField" name="pwdPassword">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="modifiedPasswordField1"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="35" y="290" width="270" height="36"/>

@@ -1,10 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
+import DatabaseConnection.UserInstance;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -15,8 +18,43 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    
+    /*
+        UserInstance currentUser = UserInstance.getInstance();
+        String username = currentUser.getAccountNumber();
+        System.out.println(username);
+    */
+    private Transfer transfer;
+    private Profile profile;
+    
     public MainFrame() {
         initComponents();
+        
+        profile = new Profile();
+        transfer = new Transfer();
+        
+        
+        panelNavigation.setRoundBorders(20, 20, 20, 20);
+        panelAbout.setRoundBorders(20, 20, 20, 20);
+        
+        
+        UserInstance currentUser = UserInstance.getInstance();
+        String username = currentUser.getPhoneNumber();
+        System.out.println("Phone Number Main Frame: " + username);
+        
+        transfer.setVisible(false);
+        transfer.setRoundBorders(20, 20, 20, 20);
+        transfer.setBounds(20, 250, 630, 410);
+        
+        lblProfile.setBackground(new Color(0xf56710));
+        profile.setVisible(true);
+        profile.setRoundBorders(20, 20, 20, 20);
+        profile.setBounds(20, 250, 630, 410);
+        
+        
+        
+        getContentPane().add(transfer);
+        getContentPane().add(profile);
     }
 
     /**
@@ -28,29 +66,158 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        roundPanel1 = new ModifiedComponents.RoundPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        panelNavigation = new ModifiedComponents.RoundPanel();
+        lblProfile = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblBankTransfer = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        panelAbout = new ModifiedComponents.RoundPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1080, 639));
-        setMinimumSize(new java.awt.Dimension(1080, 639));
+        setMaximumSize(new java.awt.Dimension(1190, 680));
+        setMinimumSize(new java.awt.Dimension(1190, 680));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1190, 680));
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+        roundPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundPanel1.setLayout(null);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconExit.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exit(evt);
+            }
+        });
+        roundPanel1.add(jLabel8);
+        jLabel8.setBounds(1150, 16, 24, 24);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/mainHeader.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        roundPanel1.add(jLabel9);
+        jLabel9.setBounds(0, 0, 1190, 180);
+
+        getContentPane().add(roundPanel1);
+        roundPanel1.setBounds(0, 0, 1190, 180);
+
+        panelNavigation.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblProfile.setBackground(new java.awt.Color(255, 255, 255));
+        lblProfile.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        lblProfile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProfile.setText("PROFILE");
+        lblProfile.setOpaque(true);
+        lblProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profile(evt);
+            }
+        });
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("WITHDRAW (C.S.)");
+        jLabel4.setOpaque(true);
+
+        lblBankTransfer.setBackground(new java.awt.Color(255, 255, 255));
+        lblBankTransfer.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        lblBankTransfer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBankTransfer.setText("BANK TRANSFER");
+        lblBankTransfer.setOpaque(true);
+        lblBankTransfer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bankTransfer(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SETTINGS");
+        jLabel1.setOpaque(true);
+
+        javax.swing.GroupLayout panelNavigationLayout = new javax.swing.GroupLayout(panelNavigation);
+        panelNavigation.setLayout(panelNavigationLayout);
+        panelNavigationLayout.setHorizontalGroup(
+            panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNavigationLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lblBankTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        panelNavigationLayout.setVerticalGroup(
+            panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBankTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(350, 0, 730, 640);
+        getContentPane().add(panelNavigation);
+        panelNavigation.setBounds(20, 200, 630, 30);
+
+        panelAbout.setBackground(new java.awt.Color(255, 255, 255));
+        panelAbout.setLayout(null);
+
+        jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel5.setText("ABOUT GWN BANK");
+        panelAbout.add(jLabel5);
+        jLabel5.setBounds(18, 6, 180, 42);
+
+        jLabel6.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel6.setText("Features and updates");
+        panelAbout.add(jLabel6);
+        jLabel6.setBounds(191, 19, 129, 19);
+
+        jLabel7.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel7.setText("<html><h3>Welcome to GWN Bank - Your Trusted Financial Partner</h3>\n\n    <p style=\"line-height: 1.6;\">At GWN Bank, we prioritize your financial security and convenience. Our state-of-the-art banking application offers a reassuring environment, ensuring that your transactions are handled with the utmost care.</p>\n\n    <h3>Key Features:</h3>\n    <ul style=\"list-style-type: none; padding: 0;\">\n        <li><strong>Secure Bank Transfers:</strong> Enjoy the peace of mind that comes with our secure bank transfer services. Your transactions are encrypted and protected to safeguard your financial information.</li>\n        <li><strong>Account Balance Visibility:</strong> Keep a close eye on your finances with the ability to view your account balance in real-time. Our user-friendly interface provides instant access to your financial snapshot.</li>\n        <li><strong>Transaction History at Your Fingertips:</strong> Stay informed about your spending patterns and track your financial journey effortlessly. GWN Bank's application allows you to access and review your transaction history with ease.</li>\n    </ul>\n\n    <p>Trust GWN Bank for a secure, reliable, and seamless banking experience tailored to your needs. Your financial well-being is our top priority.</p>\n</html>");
+        panelAbout.add(jLabel7);
+        jLabel7.setBounds(20, 40, 450, 410);
+
+        getContentPane().add(panelAbout);
+        panelAbout.setBounds(680, 200, 490, 460);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void exit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exit
+
+    private void bankTransfer(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankTransfer
+        // TODO add your handling code here:
+        
+        lblBankTransfer.setBackground(new Color(0xf56710));
+        lblProfile.setBackground(new Color(255,255,255));
+        transfer.setVisible(true);
+        profile.setVisible(false);
+    }//GEN-LAST:event_bankTransfer
+
+    private void profile(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile
+        // TODO add your handling code here:
+        
+        lblBankTransfer.setBackground(new Color(255,255,255));
+        lblProfile.setBackground(new Color(0xf56710));
+        transfer.setVisible(false);
+        profile.setVisible(true);
+    }//GEN-LAST:event_profile
 
     /**
      * @param args the command line arguments
@@ -66,6 +233,17 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblBankTransfer;
+    private javax.swing.JLabel lblProfile;
+    private ModifiedComponents.RoundPanel panelAbout;
+    private ModifiedComponents.RoundPanel panelNavigation;
+    private ModifiedComponents.RoundPanel roundPanel1;
     // End of variables declaration//GEN-END:variables
 }

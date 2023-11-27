@@ -50,7 +50,7 @@ public class ModifiedPasswordField extends JPasswordField  {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
         setForeground(Color.decode("#242424")); // Text Color
-        setFont(new java.awt.Font("Karla", java.awt.Font.BOLD, 13));
+        setFont(new java.awt.Font("Poppins", java.awt.Font.PLAIN, 12));
         setSelectionColor(colorPalette.getGeneralColor1()); // Selection Color when highlighted
         setEchoChar('\u2022');
     }
@@ -59,7 +59,7 @@ public class ModifiedPasswordField extends JPasswordField  {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(new Color(240, 240, 240)); // Background Color
+        g2.setColor(new Color(240,240,240)); // Background Color
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5); // Round Rec
         paintIcon(g);
         super.paintComponent(g);

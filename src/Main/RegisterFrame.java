@@ -1,5 +1,21 @@
 package Main;
 
+import Backend.Generate;
+import Backend.Mail;
+import Backend.PasswordHashing;
+import DatabaseConnection.UserDAO;
+import ModifiedComponents.ModifiedTextField;
+import Utilities.UtilMethods;
+import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import raven.toast.Notifications;
+
 /**
  *
  * @author jovenil sacop
@@ -9,8 +25,32 @@ public class RegisterFrame extends javax.swing.JFrame {
     /**
      * Creates new form RegisterFrame
      */
+    
+    private ImageIcon phNo = new ImageIcon(getClass().getResource("/Images/philippines.png"));
+    private ImageIcon regBG = new ImageIcon(getClass().getResource("/Images/registerWallpaper.png"));
+    private boolean verify = false;
+    private String otp;
+    private Mail mail = new Mail();
+    UtilMethods utilsMethods = new UtilMethods();
+    
     public RegisterFrame() {
         initComponents();
+        
+        panelPersonal.setRoundBorders(30, 30, 30, 30);
+        panelVerification.setRoundBorders(30, 30, 30, 30);
+        panelDetails.setRoundBorders(30, 30, 30, 30);
+        txtPhoneNumber.setPrefixIcon(phNo);
+        
+        //lblRegisterBG.setIcon(utilsMethods.imageResize(regBG, 1150, 600));
+        txtPhoneNumber.setHint("Phone Number");
+        txtFirstName.setHint("First Name");
+        txtMiddleName.setHint("Middle Name");
+        txtLastName.setHint("Last Name");
+        txtBirthdate.setHint("Birthdate (Ex: 2000-12-25)");
+        txtTIN.setHint("Tax Identification Number");
+        txtPrimaryIDNo.setHint("Primary ID Number");
+        
+        Notifications.getInstance().setJFrame(this);
     }
 
     /**
@@ -22,16 +62,41 @@ public class RegisterFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        modifiedTextField1 = new ModifiedComponents.ModifiedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        panelPersonal = new ModifiedComponents.RoundPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        modifiedTextField2 = new ModifiedComponents.ModifiedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        modifiedTextField3 = new ModifiedComponents.ModifiedTextField();
+        txtFirstName = new ModifiedComponents.ModifiedTextField();
         jLabel4 = new javax.swing.JLabel();
-        modifiedTextField4 = new ModifiedComponents.ModifiedTextField();
+        txtMiddleName = new ModifiedComponents.ModifiedTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtLastName = new ModifiedComponents.ModifiedTextField();
         jLabel5 = new javax.swing.JLabel();
+        txtBirthdate = new ModifiedComponents.ModifiedTextField();
+        panelDetails = new ModifiedComponents.RoundPanel();
+        jLabel9 = new javax.swing.JLabel();
+        txtTIN = new ModifiedComponents.ModifiedTextField();
+        jLabel10 = new javax.swing.JLabel();
+        cbPrimaryID = new ModifiedComponents.ComboBox.ComboBoxSuggestion();
+        jLabel11 = new javax.swing.JLabel();
+        txtPrimaryIDNo = new ModifiedComponents.ModifiedTextField();
+        jLabel12 = new javax.swing.JLabel();
+        Email1 = new javax.swing.JLabel();
+        txtPhoneNumber = new ModifiedComponents.ModifiedTextField();
+        panelVerification = new ModifiedComponents.RoundPanel();
+        modifiedButton1 = new ModifiedComponents.ModifiedButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtCode = new ModifiedComponents.ModifiedTextField();
+        modifiedButton2 = new ModifiedComponents.ModifiedButton();
+        jLabel14 = new javax.swing.JLabel();
+        ckSubscribe = new javax.swing.JCheckBox();
+        Email = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtEmail = new ModifiedComponents.ModifiedTextField();
+        Email2 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         lblHeaderCover = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,54 +107,181 @@ public class RegisterFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconExit.png"))); // NOI18N
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exit(evt);
+            }
+        });
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(1116, 10, 24, 24);
+
         jPanel1.setLayout(null);
 
-        modifiedTextField1.setText("modifiedTextField1");
-        jPanel1.add(modifiedTextField1);
-        modifiedTextField1.setBounds(60, 100, 260, 30);
+        jLabel6.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel6.setText("Register account");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(40, 20, 160, 50);
 
-        jLabel1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel1.setText("Register account");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(60, 20, 160, 50);
+        panelPersonal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPersonal.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jLabel1.setText("Personal Detetails");
+        panelPersonal.add(jLabel1);
+        jLabel1.setBounds(10, 10, 160, 50);
 
         jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel2.setText("First Name");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(60, 80, 120, 16);
-
-        modifiedTextField2.setText("modifiedTextField1");
-        jPanel1.add(modifiedTextField2);
-        modifiedTextField2.setBounds(60, 240, 260, 30);
-
-        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jLabel3.setText("Last Name");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(60, 220, 120, 16);
-
-        modifiedTextField3.setText("modifiedTextField1");
-        jPanel1.add(modifiedTextField3);
-        modifiedTextField3.setBounds(60, 170, 260, 30);
+        panelPersonal.add(jLabel2);
+        jLabel2.setBounds(10, 60, 120, 16);
+        panelPersonal.add(txtFirstName);
+        txtFirstName.setBounds(10, 80, 310, 30);
 
         jLabel4.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel4.setText("Middle Name");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(60, 150, 120, 16);
+        panelPersonal.add(jLabel4);
+        jLabel4.setBounds(10, 130, 120, 16);
+        panelPersonal.add(txtMiddleName);
+        txtMiddleName.setBounds(10, 150, 310, 30);
 
-        modifiedTextField4.setText("modifiedTextField1");
-        jPanel1.add(modifiedTextField4);
-        modifiedTextField4.setBounds(60, 310, 260, 30);
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel3.setText("Last Name");
+        panelPersonal.add(jLabel3);
+        jLabel3.setBounds(10, 200, 120, 16);
+        panelPersonal.add(txtLastName);
+        txtLastName.setBounds(10, 220, 310, 30);
 
         jLabel5.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel5.setText("Birthdate");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(60, 290, 120, 16);
+        panelPersonal.add(jLabel5);
+        jLabel5.setBounds(10, 270, 120, 16);
+        panelPersonal.add(txtBirthdate);
+        txtBirthdate.setBounds(10, 290, 310, 30);
+
+        jPanel1.add(panelPersonal);
+        panelPersonal.setBounds(40, 80, 330, 340);
+
+        panelDetails.setBackground(new java.awt.Color(255, 255, 255));
+        panelDetails.setLayout(null);
+
+        jLabel9.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel9.setText("Tax Indetification Number (Optional)");
+        panelDetails.add(jLabel9);
+        jLabel9.setBounds(10, 60, 230, 16);
+        panelDetails.add(txtTIN);
+        txtTIN.setBounds(10, 80, 310, 30);
+
+        jLabel10.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel10.setText("Primary ID");
+        panelDetails.add(jLabel10);
+        jLabel10.setBounds(10, 130, 120, 16);
+
+        cbPrimaryID.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Philippine Passport", "Driver’s License", "GSIS Card", "UMID Card", "PRC ID", "OWWA ID", "IBP ID", "Digitized BIR Taxpayer’s ID", "Senior Citizen’s ID Card ", "Diplomat ID", "Digitized Postal ID ", "OFW ID" }));
+        panelDetails.add(cbPrimaryID);
+        cbPrimaryID.setBounds(10, 150, 310, 30);
+
+        jLabel11.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel11.setText("Primary ID No:");
+        panelDetails.add(jLabel11);
+        jLabel11.setBounds(10, 200, 120, 16);
+        panelDetails.add(txtPrimaryIDNo);
+        txtPrimaryIDNo.setBounds(10, 220, 310, 30);
+
+        jLabel12.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jLabel12.setText("Identification Details");
+        panelDetails.add(jLabel12);
+        jLabel12.setBounds(10, 10, 160, 50);
+
+        Email1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        Email1.setText("Phone Number");
+        panelDetails.add(Email1);
+        Email1.setBounds(10, 270, 230, 16);
+        panelDetails.add(txtPhoneNumber);
+        txtPhoneNumber.setBounds(10, 290, 310, 30);
+
+        jPanel1.add(panelDetails);
+        panelDetails.setBounds(410, 80, 330, 340);
+
+        panelVerification.setBackground(new java.awt.Color(255, 255, 255));
+        panelVerification.setLayout(null);
+
+        modifiedButton1.setBackground(new Color(0xfb8a02));
+        modifiedButton1.setText("SEND CODE");
+        modifiedButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendCode(evt);
+            }
+        });
+        panelVerification.add(modifiedButton1);
+        modifiedButton1.setBounds(220, 80, 100, 30);
+
+        jLabel7.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jLabel7.setText("Verification");
+        panelVerification.add(jLabel7);
+        jLabel7.setBounds(10, 10, 160, 50);
+        panelVerification.add(txtCode);
+        txtCode.setBounds(10, 140, 310, 30);
+
+        modifiedButton2.setBackground(new Color(0xf56710));
+        modifiedButton2.setFont(new java.awt.Font("Poppins", java.awt.Font.BOLD, 12));
+        modifiedButton2.setText("REGISTER");
+        modifiedButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                register(evt);
+            }
+        });
+        panelVerification.add(modifiedButton2);
+        modifiedButton2.setBounds(10, 250, 310, 30);
+
+        jLabel14.setFont(new java.awt.Font("Poppins", 1, 11)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Sign in");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signin(evt);
+            }
+        });
+        panelVerification.add(jLabel14);
+        jLabel14.setBounds(10, 300, 310, 20);
+
+        ckSubscribe.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        ckSubscribe.setText("Subscribe to receive news and promotions.");
+        panelVerification.add(ckSubscribe);
+        ckSubscribe.setBounds(10, 180, 300, 20);
+
+        Email.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        Email.setText("One Time Password");
+        panelVerification.add(Email);
+        Email.setBounds(10, 120, 230, 16);
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        panelVerification.add(jSeparator1);
+        jSeparator1.setBounds(30, 290, 270, 10);
+        panelVerification.add(txtEmail);
+        txtEmail.setBounds(10, 80, 200, 30);
+
+        Email2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        Email2.setText("Email");
+        panelVerification.add(Email2);
+        Email2.setBounds(10, 60, 230, 16);
+
+        jLabel15.setFont(new java.awt.Font("Poppins", 0, 11)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("<html><center>By completing this registration, you agree to abide by the terms and conditions set forth by GWN BANK.</center></html>");
+        panelVerification.add(jLabel15);
+        jLabel15.setBounds(0, 200, 330, 50);
+
+        jPanel1.add(panelVerification);
+        panelVerification.setBounds(780, 80, 330, 340);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 223, 1150, 450);
 
-        lblHeaderCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registerHeader.png"))); // NOI18N
+        lblHeaderCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Your paragraph text.png"))); // NOI18N
         getContentPane().add(lblHeaderCover);
         lblHeaderCover.setBounds(0, 0, 1150, 230);
 
@@ -97,33 +289,121 @@ public class RegisterFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void exit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exit
+
+    private void signin(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signin
+        // TODO add your handling code here:
+        otp = "";
+        this.dispose();
+        new LoginFrame().setVisible(true);
+    }//GEN-LAST:event_signin
+
+    private void register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register
+        // TODO add your handling code here:
+        
+        // Instance of the needed backend classes
+        UserDAO userDAO = new UserDAO();
+        Generate generate = new Generate();
+        PasswordHashing passwordHashing = new PasswordHashing();
+        
+        String accountNumber = generate.generateAccountNumber();
+        System.out.println("Account Number: " + accountNumber);
+        String accountPassword = generate.generateRandomPassword(12);
+        String firstName = txtFirstName.getText();
+        String middleName = txtMiddleName.getText();
+        String lastName = txtLastName.getText();
+        String fullName = firstName + " " + middleName + " " + lastName;
+        String phoneNumber = txtPhoneNumber.getText();
+        String email = txtEmail.getText();
+        String birthdate = txtBirthdate.getText();
+        String tin = txtTIN.getText();
+        String primaryID = (String) cbPrimaryID.getSelectedItem();
+        String primaryIDNO = txtPrimaryIDNo.getText();
+        
+        String hashedPassword = passwordHashing.hashPassword(accountPassword);
+        
+        if (txtCode.getText().equals(otp)) {
+            
+            // Inserting new user
+            userDAO.insert(accountNumber, 
+                hashedPassword, 
+                firstName, 
+                middleName, 
+                lastName, 
+                fullName, 
+                email, 
+                phoneNumber, 
+                birthdate, 
+                tin, 
+                primaryID, 
+                primaryIDNO, 
+                20000.00);
+            
+            mail.registered(email, accountNumber, accountPassword);
+            // Notify success
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_LEFT, "Registred Successfully. Please check your email to see your account number and account password");
+            clearAll();
+        } else {
+            
+            // Notify error
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_LEFT, "One time Password doesn't match the one we sent you");
+            //JOptionPane.showMessageDialog(null, "Invalid OTP: One time Password doesn't match the one we sent you", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_register
+
+    public void clearAll() {
+        ModifiedTextField textFields[] = {txtFirstName, txtMiddleName, txtLastName, txtBirthdate, txtTIN, txtPrimaryIDNo, txtPhoneNumber, txtEmail, txtCode};
+        
+        for (ModifiedTextField textField: textFields) {
+            textField.setText("");
+        }
+        
+        cbPrimaryID.setSelectedIndex(0);
+        ckSubscribe.setSelected(false);
+    }
+    
+    private void sendCode(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendCode
+        // TODO add your handling code here:
+        Generate code = new Generate();
+        
+        String email = txtEmail.getText().trim();
+        
+        
+        if (isValidEmailAddress(email)) {
+            System.out.println("REG: Valid Email Address");
+            otp = code.generateVerificationCode();
+            mail.mail(email, otp);
+            Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.TOP_LEFT, "A One Time Password was sent to your email.");
+            //JOptionPane.showMessageDialog(null, "Your OTP was sent to your email.", "One Time Password (OTP)", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_LEFT, "Invalid Email address");
+            //JOptionPane.showMessageDialog(null, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_sendCode
+
+    public boolean isValidEmailAddress(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+        FlatLightLaf.setup();
+        
+        UIManager.put( "Toast.duration", 4000);
+        UIManager.put( "Toast.frameInsets", new Insets(15,15,15,15));
+        UIManager.put( "defaultFont", new Font("Karla", Font.BOLD, 10));
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -133,16 +413,41 @@ public class RegisterFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Email;
+    private javax.swing.JLabel Email1;
+    private javax.swing.JLabel Email2;
+    private ModifiedComponents.ComboBox.ComboBoxSuggestion cbPrimaryID;
+    private javax.swing.JCheckBox ckSubscribe;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblHeaderCover;
-    private ModifiedComponents.ModifiedTextField modifiedTextField1;
-    private ModifiedComponents.ModifiedTextField modifiedTextField2;
-    private ModifiedComponents.ModifiedTextField modifiedTextField3;
-    private ModifiedComponents.ModifiedTextField modifiedTextField4;
+    private ModifiedComponents.ModifiedButton modifiedButton1;
+    private ModifiedComponents.ModifiedButton modifiedButton2;
+    private ModifiedComponents.RoundPanel panelDetails;
+    private ModifiedComponents.RoundPanel panelPersonal;
+    private ModifiedComponents.RoundPanel panelVerification;
+    private ModifiedComponents.ModifiedTextField txtBirthdate;
+    private ModifiedComponents.ModifiedTextField txtCode;
+    private ModifiedComponents.ModifiedTextField txtEmail;
+    private ModifiedComponents.ModifiedTextField txtFirstName;
+    private ModifiedComponents.ModifiedTextField txtLastName;
+    private ModifiedComponents.ModifiedTextField txtMiddleName;
+    private ModifiedComponents.ModifiedTextField txtPhoneNumber;
+    private ModifiedComponents.ModifiedTextField txtPrimaryIDNo;
+    private ModifiedComponents.ModifiedTextField txtTIN;
     // End of variables declaration//GEN-END:variables
 }

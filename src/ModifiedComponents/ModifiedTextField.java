@@ -27,6 +27,7 @@ public class ModifiedTextField extends JTextField {
     private Icon prefixIcon;
     private Icon suffixIcon;
     private String hint = "";
+    private boolean centerHint = true;
 
     public String getHint() {
         return hint;
@@ -34,6 +35,10 @@ public class ModifiedTextField extends JTextField {
 
     public void setHint(String hint) {
         this.hint = hint;
+    }
+    
+    public void setCenterHint(boolean centerHint) {
+        this.centerHint = centerHint;
     }
 
     public Icon getPrefixIcon() {
@@ -58,7 +63,7 @@ public class ModifiedTextField extends JTextField {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
         setForeground(Color.decode("#000")); // Text Color
-        setFont(new java.awt.Font("Poppins", java.awt.Font.BOLD, 12)); // 
+        setFont(new java.awt.Font("Poppins", java.awt.Font.PLAIN, 12)); // 
         setSelectionColor(colorPalette.getGeneralColor1()); // Selection color when highlighted
         
     }
@@ -67,26 +72,44 @@ public class ModifiedTextField extends JTextField {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(new Color(240, 240, 240)); // Background color
+        g2.setColor(new Color(240,240,240)); // Background color
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
         paintIcon(g);
         super.paintComponent(g);
         
     }
     
-    
-
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
-        if (getText().length() == 0) {
-            int h = getHeight();
-            ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            Insets ins = getInsets();
-            FontMetrics fm = g.getFontMetrics();
-            g.setColor(new Color(200, 200, 200));
-            g.drawString(hint, ins.left, h / 2 + fm.getAscent() / 2 - 2);
+        if (centerHint) {
+            super.paint(g);
+            if (getText().length() == 0) {
+                int h = getHeight();
+                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                Insets ins = getInsets();
+                FontMetrics fm = g.getFontMetrics();
+                g.setColor(new Color(200, 200, 200));
+                g.drawString(hint, ins.left, h / 2 + fm.getAscent() / 2 - 2);
+            }
+        } else {
+            super.paint(g);
+            if (getText().length() == 0) {
+                int h = getHeight();
+                Insets ins = getInsets();
+                FontMetrics fm = g.getFontMetrics();
+                int y = (h - fm.getHeight()) / 2 + fm.getAscent();
+
+                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                g.setColor(new Color(200, 200, 200));
+
+                // Calculate x-coordinate to horizontally center the hint text
+                int textWidth = fm.stringWidth(hint);
+                int x = (getWidth() - ins.left - ins.right - textWidth) / 2 + ins.left;
+
+                g.drawString(hint, x, y);
+            }
         }
+        
     }
 
     private void paintIcon(Graphics g) {

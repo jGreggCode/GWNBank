@@ -1,7 +1,8 @@
 package Main;
 
-import Connection.User;
-import Connection.UserDAO;
+import Backend.PasswordHashing;
+import DatabaseConnection.UserDAO;
+import DatabaseConnection.UserInstance;
 import Utilities.TextLimit;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.Icon;
@@ -102,10 +103,8 @@ public class LoginFrame extends javax.swing.JFrame {
         lblJustLogo.setVerifyInputWhenFocusTarget(false);
         pnlLogin.add(lblJustLogo);
         lblJustLogo.setBounds(110, 30, 120, 120);
-
-        txtAccountNo.setText("modifiedTextField1");
         pnlLogin.add(txtAccountNo);
-        txtAccountNo.setBounds(35, 230, 270, 36);
+        txtAccountNo.setBounds(35, 230, 270, 39);
 
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/showpassword.png"))); // NOI18N
@@ -117,8 +116,6 @@ public class LoginFrame extends javax.swing.JFrame {
         });
         pnlLogin.add(lblPassword);
         lblPassword.setBounds(270, 296, 24, 24);
-
-        pwdPassword.setText("modifiedPasswordField1");
         pnlLogin.add(pwdPassword);
         pwdPassword.setBounds(35, 290, 270, 36);
 
@@ -235,19 +232,23 @@ public class LoginFrame extends javax.swing.JFrame {
     private void login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login
         // TODO add your handling code here:
         UserDAO userDAO = new UserDAO();
+        PasswordHashing passwordHashing = new PasswordHashing();
         
-        String accountNo = txtAccountNo.getText();
-        String accountPass = new String(pwdPassword.getPassword());
+        String accountNumber = txtAccountNo.getText();
+        String accountPassword = new String(pwdPassword.getPassword());
         
-        User user = userDAO.getUserByUsernameAndPassword(accountNo, accountPass);
+        String hashedPasswordFromDB = userDAO.getPasswordHashByUsername(accountNumber);
 
-        if (user != null) {
-            System.out.println("User found: " + user.getUsername());
+        if (hashedPasswordFromDB != null && passwordHashing.checkPassword(accountPassword, hashedPasswordFromDB)) {
+            userDAO.getAllByUsername(accountNumber);
+            this.dispose();
+            new MainFrame().setVisible(true);
         } else {
             System.out.println("User not found");
         }
     }//GEN-LAST:event_login
-
+    // Zv0SLBgVrmH9
+    // 628602519917
     private void showHidePassword(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showHidePassword
         // TODO add your handling code here:
         if (!show) {
